@@ -1,3 +1,4 @@
+```mermaid
 sequenceDiagram
     main->>+rautatietori: Lataajalaite()
     main->>+ratikka6: Lukijalaite()
@@ -22,3 +23,4 @@ sequenceDiagram
     ratikka6-->>-main: True
     main->>bussi244: osta_lippu(kallen_kortti, 2)
     bussi244-->>-main: False
+```
