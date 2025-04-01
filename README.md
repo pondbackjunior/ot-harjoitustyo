@@ -1,8 +1,51 @@
-# Ohjelmistotekniikka, harjoitustyö
-Tämä *ohjelmistotekniikan harjoitustyö* tulee olemaan **HTML-editori.**
+# HTML Editor
 
-[laskarit](https://github.com/pondbackjunior/ot-harjoitustyo/tree/main/laskarit)
+Sovelluksen avulla käyttäjän on mahdollista muokata HTML-tiedostoja.
 
-[vaatimuusmäärittely](https://github.com/pondbackjunior/ot-harjoitustyo/blob/main/dokumentaatio/vaatimuusmaarittely.md)
+## Dokumentaatio
 
-[tuntikirjanpito](https://github.com/pondbackjunior/ot-harjoitustyo/blob/main/dokumentaatio/tuntikirjanpito.md)
+- [Vaatimusmäärittely](./dokumentaatio/vaatimusmaarittely.md)
+- [Työaikakirjanpito](./dokumentaatio/tuntikirjanpito.md)
+- [Changelog](./dokumentaatio/changelog.md)
+
+## Asennus
+
+1. Asenna riippuvuudet komennolla:
+
+```bash
+poetry install
+```
+
+2. Käynnistä sovellus komennolla:
+
+```bash
+poetry run invoke start
+```
+
+## Komentorivitoiminnot
+
+### Ohjelman suorittaminen
+
+Ohjelman pystyy suorittamaan komennolla:
+
+```bash
+poetry run invoke start
+```
+
+### Testaus
+
+Testit suoritetaan komennolla:
+
+```bash
+poetry run invoke test
+```
+
+### Testikattavuus
+
+Testikattavuusraportin voi generoida komennolla:
+
+```bash
+poetry run invoke coverage-report
+```
+
+Raportti generoituu _htmlcov_-hakemistoon.
