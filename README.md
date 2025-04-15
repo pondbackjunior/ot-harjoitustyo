@@ -8,6 +8,7 @@ Sovelluksen avulla käyttäjän on mahdollista muokata HTML-tiedostoja.
 - [Työaikakirjanpito](./dokumentaatio/tuntikirjanpito.md)
 - [Changelog](./dokumentaatio/changelog.md)
 - [Arkkitehtuuri](./dokumentaatio/arkkitehtuuri.md)
+- [Käyttöohjeet](./dokumentaatio/kaytto-ohjeet.md)
 
 ## Asennus
 
@@ -50,3 +51,10 @@ poetry run invoke coverage-report
 ```
 
 Raportti generoituu _htmlcov_-hakemistoon.
+
+### Pylint
+
+Tiedoston [.pylintrc](./.pylintrc) määrittelemät tarkistukset voi suorittaa komennolla:
+
+```bash
+poetry run invoke lint
