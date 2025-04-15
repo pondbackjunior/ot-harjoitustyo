@@ -40,11 +40,11 @@ class UI:
             style="customvisual.TButton")
 
         # Place buttons
-        open_file_button.place(relx=0.075, rely=0.1, anchor="center")
-        new_file_button.place(relx=0.175, rely=0.1, anchor="center")
-        save_file_button.place(relx=0.275, rely=0.1, anchor="center")
-        self.source_button.place(relx=0.925, rely=0.1, anchor="center")
-        self.visual_button.place(relx=0.825, rely=0.1, anchor="center")
+        open_file_button.place(relx=0.09, rely=0.1, anchor="center")
+        new_file_button.place(relx=0.19, rely=0.1, anchor="center")
+        save_file_button.place(relx=0.29, rely=0.1, anchor="center")
+        self.source_button.place(relx=0.91, rely=0.1, anchor="center")
+        self.visual_button.place(relx=0.81, rely=0.1, anchor="center")
 
         # Setup menu for the Open button
         open_menu = tk.Menu(open_file_button, tearoff=0)
@@ -62,7 +62,7 @@ class UI:
                              anchor="center", width=1200, height=590)
 
     def setup_toolbar(self):
-        self.toolbar = ttk.Frame(self._root, width=30)
+        self.toolbar = ttk.Frame(self._root, width=65)
         self.toolbar.pack_propagate(False)
         ttk.Button(self.toolbar, text="𝐁", command=lambda: self._main_editor.insert_tag(
             "b")).pack(pady=2, fill="x")
@@ -70,8 +70,14 @@ class UI:
             "i")).pack(pady=2, fill="x")
         ttk.Button(self.toolbar, text="𝐔", command=lambda: self._main_editor.insert_tag(
             "u")).pack(pady=2, fill="x")
-        ttk.Button(self.toolbar, text="H1", command=lambda: self._main_editor.insert_tag(
-            "h1")).pack(pady=2, fill="x")
+        heading_button = ttk.Menubutton(self.toolbar, text="H.")
+        heading_button.pack(pady=2, fill="x")
+
+        heading_menu = tk.Menu(heading_button, tearoff=0)
+        for i in range(1, 6):
+            heading_menu.add_command(
+                label=f"Heading {i}", command=lambda h=i: self._main_editor.insert_tag(f"h{h}"))
+        heading_button["menu"] = heading_menu
 
     def setup_style(self):
         ttk.Style().configure("customsource.TButton", indicatoron=False)
