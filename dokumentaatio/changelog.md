@@ -10,3 +10,13 @@
 - Lisätty myös pikanäppäimet näitä varten (CTRL + b, i, u)
 - Lisätty napit, jolla voi vaihtaa visual ja source muodon välillä
 - Lisätty testit, että uusi tiedosto ja tiedoston tallentaminen toimii
+
+## Viikko 5
+- Lisätty Ctrl-z ja Ctr-Shift-z undo ja redo pikanäppäimet
+- Lisätty Ctrl-o (Open), Ctrl-n (New file), Ctrl-s (Save) pikanäppäimet
+- Lisätty tietokanta tiedostoille
+    - FileDatabase luokka, joka vastaa tietokannasta
+    - Editori ehdottaa suoraan viittä viimeksi muokattua tiedostoa, kun painetaan Open nappia
+    - Kaikki editorilla muokatut tiedostot luetellaan myös popup-ikkunassa
+        - Editori pitää käynnistää uudelleen, että tiedostojen lista päivittyy
+- Lisätty visuaalisen editoring heading-napille lisää vaihtoehtoja dropdown-ikkunassa
