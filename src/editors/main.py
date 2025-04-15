@@ -40,7 +40,8 @@ class EditorMain:
             cursor_index = f'{cursor}+{len(f"<{tag}>")}c'
             self._textarea.mark_set("insert", cursor_index)
 
-    # Pylint's disable unused-argument is used because the event argument is required (otherwise it runs into an error), but we don't use it.
+    # Pylint's disable unused-argument is used because the event argument is
+    # required (otherwise it runs into an error), but we don't use it.
     def undo(self, event=None):  # pylint: disable=unused-argument
         try:
             self._textarea.edit_undo()
