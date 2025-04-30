@@ -1,8 +1,10 @@
 # Käyttöohjeet
 
-Sovelluksessa on kaksi muotoa: Source ja Visual. Source-muodossa muokataan puhdasta html-lähdekoodia. Visuaalisessa muodossa on apuvälineenä toolbar, jossa on nappeja jotka lisää html-tägejä käyttäjän puolesta (sovelluksen valmistuessa visuaalisessa muodossa teksti tulee näyttämään enemmän siltä, miltä se oikeasti näyttää selaimessa, eikä puhtaalta html:ltä).
+Sovelluksessa on kaksi muotoa: Source ja Visual. Source-muodossa muokataan puhdasta html-lähdekoodia. Visuaalisessa muodossa on apuvälineenä toolbar, jossa on nappeja jotka lisää html-tägejä käyttäjän puolesta, ja tägien sisällä oleva teksti muistuttaa sitä, miltä se tulee näyttämään oikeasti selaimessa.
 
 Sovelluksella voi luoda uusia html-tiedostoja ja tallentaa niitä, sekä avata olemassa olevia tiedostoja. Kaikki editorilla muokatut tiedostot sekä 5 uusinta tiedostoa näytetään Open-napin sisällä.
+
+Sovelluksessa on mukana example.html tiedosto, jota katsomalla voi verrata visuaalisen ja source-editorin muotoilua.
 
 ## Pikanäppäimet
 

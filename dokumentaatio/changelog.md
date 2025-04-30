@@ -20,3 +20,8 @@
     - Kaikki editorilla muokatut tiedostot luetellaan myös popup-ikkunassa
         - Editori pitää käynnistää uudelleen, että tiedostojen lista päivittyy
 - Lisätty visuaalisen editoring heading-napille lisää vaihtoehtoja dropdown-ikkunassa
+
+## Viikko 6
+- Lisätty editors-kansioon visual.py tiedosto ja VisualEditor luokka, joka vastaa tekstin mukauttamisesta visuaalisessa muodossa
+    - Lisätty funktio, joka lisää/poistaa tägejä tekstikentästä sitä mukaan, kun siihen kirjoitetaan, ja muokkaa tägien sisällä olevan tekstin tyylitettyyn muotoon
+- Lisätty testit tietokannan toiminnalle

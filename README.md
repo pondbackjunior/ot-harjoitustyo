@@ -9,6 +9,7 @@ Sovelluksen avulla käyttäjän on mahdollista muokata HTML-tiedostoja.
 - [Changelog](./dokumentaatio/changelog.md)
 - [Arkkitehtuuri](./dokumentaatio/arkkitehtuuri.md)
 - [Käyttöohjeet](./dokumentaatio/kaytto-ohjeet.md)
+- [Releaset](https://github.com/pondbackjunior/ot-harjoitustyo/releases)
 
 ## Asennus
 

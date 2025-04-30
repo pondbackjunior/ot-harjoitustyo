@@ -37,6 +37,7 @@ class FileDatabase:
         return cur.fetchall()
 
     def get_five_newest_files(self):
+        """Gets fives newest files to be used in the quick Open menu"""
         cur = self.conn.cursor()
         cur.execute("SELECT * FROM Files ORDER BY modified_at DESC LIMIT 5")
         return cur.fetchall()

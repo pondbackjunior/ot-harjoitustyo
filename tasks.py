@@ -8,7 +8,7 @@ def start(ctx):
 
 @task
 def test(ctx):
-    ctx.run("poetry run pytest src", pty=True)
+    ctx.run("poetry run pytest -s src", pty=True)
 
 
 @task

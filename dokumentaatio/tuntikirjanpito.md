@@ -6,4 +6,5 @@
 | 7.4. | 2    | Lisää testejä, source-visual napit |
 | 8.4. | 2    | html-tag napit, pikanäppäimet |
 | 15.4. | 5    | undo- ja redo-ominaisuudet, tietokanta lisätty, lisätty heading-vaihtoehtoja napille |
-| yht | 12    |  |
+| 29.4. | 8    | tyylirenderöinti visuaaliselle editorille, testit tietokannalle |
+| yht | 20    |  |

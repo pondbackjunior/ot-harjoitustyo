@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from utils.file_handler import FileHandler
 from editors.main import EditorMain
-
+from editors.visual import VisualEditor, TAGS
 
 class UI:
     def __init__(self, root, all_files, five_newest_files):
@@ -10,6 +10,7 @@ class UI:
         self._textarea = tk.Text(master=self._root, wrap="word", undo=True)
         self._file_handler = FileHandler(self._root, self._textarea)
         self._main_editor = EditorMain(self._root, self._textarea)
+        self._visual_editor = VisualEditor(self._root, self._textarea)
         self._edit_mode = tk.StringVar(value="source")
         self._all_files = all_files
         self._five_newest_files = five_newest_files
@@ -62,6 +63,7 @@ class UI:
                              anchor="center", width=1200, height=590)
 
     def setup_toolbar(self):
+        """Visual editor toolbar setup"""
         self.toolbar = ttk.Frame(self._root, width=65)
         self.toolbar.pack_propagate(False)
         ttk.Button(self.toolbar, text="𝐁", command=lambda: self._main_editor.insert_tag(
@@ -80,19 +82,26 @@ class UI:
         heading_button["menu"] = heading_menu
 
     def setup_style(self):
+        """Initial button styling"""
         ttk.Style().configure("customsource.TButton", indicatoron=False)
         ttk.Style().configure("customvisual.TButton", indicatoron=False)
 
     def switch_editor(self):
+        """Switches between the source and visual editor"""
         current = self._edit_mode.get()
         if current == "source":
             ttk.Style().configure("customsource.TButton", background="#b09646")
             ttk.Style().configure("customvisual.TButton", background="#e6c35a")
             self.toolbar.pack_forget()
+            self._textarea.unbind("<KeyRelease>")
+            for tag in TAGS:
+                self._textarea.tag_remove(tag, "1.0", tk.END)
         else:
             ttk.Style().configure("customvisual.TButton", background="#b09646")
             ttk.Style().configure("customsource.TButton", background="#e6c35a")
             self.toolbar.pack(side="left", fill="y", pady=100)
+            self._textarea.bind("<KeyRelease>", self._visual_editor.on_key_release)
+            self._visual_editor.visualize_html(self._textarea.get("1.0", "end-1c"))
 
     def all_files_popup(self):
         """Sets up the popup for opening the list of all files"""
