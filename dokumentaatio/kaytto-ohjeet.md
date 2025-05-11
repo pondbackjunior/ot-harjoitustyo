@@ -2,6 +2,8 @@
 
 Tämä on yksinkertainen HTML-tiedostojen editori, jolla on kaksi muotoa (Source ja Visual) ja muutamia tekstieditorien yleisiä toimintoja.
 
+Sovelluksen juurikansiossa on tiedosto `example.html`, jolla voi tarkistella ominaisuuksia.
+
 ## Napit
 
 Open:

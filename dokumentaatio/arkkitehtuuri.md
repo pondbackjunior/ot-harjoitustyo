@@ -31,7 +31,7 @@ Käyttöliittymästä vastaavat luokat UI, EditorMain, VisualEditor, ja SourceEd
 
 ### Tiedoston avaaminen
 
-Alla oleva sekvenssikaavio kuvaa sitä, miten avattu tiedosto siirtyy tekstikenttään:
+Alla oleva sekvenssikaavio kuvaa sitä, miten tiedoston tallentaminen onnistuu käyttöliittymästä:
 
 ```mermaid
     sequenceDiagram
