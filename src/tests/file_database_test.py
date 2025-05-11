@@ -1,13 +1,15 @@
-import pytest
 import unittest
 import sqlite3
 from time import sleep
+import pytest
 from utils.file_database import FileDatabase
+
 
 class MemoryFileDatabase(FileDatabase):
     def __init__(self):
         super().__init__()
         self.conn = sqlite3.connect(":memory:")
+
 
 class TestFileDatabase(unittest.TestCase):
     @pytest.fixture(autouse=True)
@@ -38,6 +40,12 @@ class TestFileDatabase(unittest.TestCase):
         assert results[0][1] == "Test2"
         assert results[0][2] == "Text B"
 
+    def test_add_and_remove_file(self):
+        self.db.add_file("Test1", "Text A", "/path/to/file.html")
+        self.db.remove_file("/path/to/file.html")
+        results = self.db.get_all_files()
+        assert results == []
+
     def test_reset_drops_table(self):
         self.db.add_file("Test", "text here", "/path/to/file.html")
         self.db.reset()
@@ -49,7 +57,7 @@ class TestFileDatabase(unittest.TestCase):
         print("Wait 5s for loop...")
         for i in range(7):
             self.db.add_file(f"File{i}", f"Text {i}", f"/file{i}.html")
-            sleep(1) # Sleeping to get new timestamps
+            sleep(1)  # Sleeping to get new timestamps
 
         newest = self.db.get_five_newest_files()
         assert len(newest) == 5

@@ -31,6 +31,11 @@ class FileDatabase:
                     (name, content, full_path))
         self.conn.commit()
 
+    def remove_file(self, full_path):
+        cur = self.conn.cursor()
+        cur.execute("DELETE FROM Files WHERE full_path = ?", (full_path,))
+        self.conn.commit()
+
     def get_all_files(self, order_by="ORDER BY modified_at DESC"):
         cur = self.conn.cursor()
         cur.execute(f"SELECT * FROM Files {order_by}")

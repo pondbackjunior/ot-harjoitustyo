@@ -25,8 +25,14 @@ class FileHandler:
                 filetypes=[("HTML files", "*.html")])
         if file:
             self._current_file = file
-            with open(file, "r", encoding="utf-8") as f:
-                data = f.read()
+            try:
+                with open(file, "r", encoding="utf-8") as f:
+                    data = f.read()
+            except FileNotFoundError:
+                messagebox.showerror(
+                    "Error", "That file does not exist anymore.")
+                self._database.remove_file(file)
+                return
             self._textarea.delete("1.0", tk.END)
             self._textarea.insert("1.0", data)
             self._root.title(f"HTML editor - {file}")

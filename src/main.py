@@ -5,7 +5,7 @@ from utils.file_database import FileDatabase
 
 def main():
     window = Tk()
-    window.geometry("1340x720")
+    window.geometry("1340x740")
     window.title("HTML editor")
 
     database = FileDatabase()

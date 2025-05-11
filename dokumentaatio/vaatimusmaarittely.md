@@ -11,9 +11,9 @@ Sovelluksella on ainoastaan yksi käyttäjärooli eli normaali käyttäjä.
 ## Suunnitellut toiminnallisuudet
 
 - [✅] Käyttäjä voi luoda uuden html-tiedoston tai tarkastella olemassa olevaa tiedostoa
-- Käyttäjä voi muokaata html-tiedostoa visuaalisesti
+-  [✅]Käyttäjä voi muokaata html-tiedostoa visuaalisesti
     - [✅] Käyttäjä voi hiirellä painaa nappeja, jotka lisää html-ominaisuuksia tekstikenttään
-    - Käyttäjä näkee todellisen (WYSIWYG) lopputuloksen suoraan tekstikentässä
+    - [✅] Käyttäjä näkee todellisen (WYSIWYG) lopputuloksen suoraan tekstikentässä
 - [✅] Käyttäjä voi muokaata html-tiedostoa source-muodossa
 - [✅] Käyttäjä voi tallentaa tehdyt muutokset tiedostoon
 - [✅] Käyttäjä voi pikaisesti avata editorilla muokatut tiedostot

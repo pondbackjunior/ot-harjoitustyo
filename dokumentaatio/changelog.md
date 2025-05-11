@@ -25,3 +25,11 @@
 - Lisätty editors-kansioon visual.py tiedosto ja VisualEditor luokka, joka vastaa tekstin mukauttamisesta visuaalisessa muodossa
     - Lisätty funktio, joka lisää/poistaa tägejä tekstikentästä sitä mukaan, kun siihen kirjoitetaan, ja muokkaa tägien sisällä olevan tekstin tyylitettyyn muotoon
 - Lisätty testit tietokannan toiminnalle
+
+# Loppupalautus
+- Lisätty editoriin find+replace toiminto
+- Lisätty editors-kansioon source.py tiedosto ja SourceEditor luokaa, joka vastaa syntax highlighteista source-muodossa
+- Lisätty Preview-nappi, jolla voi katsoa suoraan miltä tiedosto näyttää selaimessa
+- Lisätty automaattinen sisennys
+- Jos editorin muistamaa tiedostoa ei enää ole olemassa, se nyt ilmoittaa asiasta ja poistaa sen tietokannasta (ja testi tälle toiminnallisuudelle)
+- Viimeistely ja satunnaiset bugfixit

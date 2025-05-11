@@ -1,0 +1,1 @@
+Sovelluksen tiedostoissa käytetään useasti `# pylint: disable=unused-argument` -kommenttia, koska tkinter tarvitsee `event=None` -argumentin useissa funktioissa, vaikka funktio ei tekisi event-argumentilla mitään. Ilman `event=None` argumenttia funktio menee aina Erroriin. Tämän takia ne siis jätetään pois pylintin tarkistuksista.

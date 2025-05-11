@@ -13,22 +13,13 @@ TAGS = {
     "h5": "h5"
 }
 
+
 class VisualEditor:
     def __init__(self, root, textarea):
         self._root = root
         self._textarea = textarea
 
-        self._textarea.tag_configure("bold", font=("TkDefaultFont", 10, "bold"))
-        self._textarea.tag_configure("italic", font=("TkDefaultFont", 10, "italic"))
-        self._textarea.tag_configure("underline", font=("TkDefaultFont", 10, "underline"))
-        self._textarea.tag_configure("dim", foreground="#AAAAAA")
-        self._textarea.tag_configure("h1", font=("TkDefaultFont", 20, "bold"))
-        self._textarea.tag_configure("h2", font=("TkDefaultFont", 18, "bold"))
-        self._textarea.tag_configure("h3", font=("TkDefaultFont", 16, "bold"))
-        self._textarea.tag_configure("h4", font=("TkDefaultFont", 14, "bold"))
-        self._textarea.tag_configure("h5", font=("TkDefaultFont", 12, "bold"))
-
-    def on_key_release(self, event=None): # pylint: disable=unused-argument
+    def on_key_release(self, event=None):  # pylint: disable=unused-argument
         """Called when a key is released. Updates the visualization of the HTML."""
         html = self._textarea.get("1.0", "end-1c")
         self.visualize_html(html)
@@ -41,12 +32,12 @@ class VisualEditor:
         for tag in TAGS:
             self._textarea.tag_remove(tag, "1.0", tk.END)
 
-        pattern = re.finditer(r"(</?([a-zA-Z0-9]+)>)|([^<>]+)", html)
+        pattern = re.finditer(r"(</?!?([a-zA-Z0-9]+\s?(.*?))>)|([^<>]+)", html)
         index = 0
         tag_stack = []
 
         for match in pattern:
-            tag, tag_type, text = match.groups()
+            tag, tag_type, _, text = match.groups()
 
             if tag:
                 tag_start = f"1.0 + {index} chars"

@@ -1,8 +1,13 @@
 import tkinter as tk
 from tkinter import ttk
+import os
+import webbrowser
+import tempfile
 from utils.file_handler import FileHandler
 from editors.main import EditorMain
 from editors.visual import VisualEditor, TAGS
+from editors.source import SourceEditor
+
 
 class UI:
     def __init__(self, root, all_files, five_newest_files):
@@ -11,6 +16,7 @@ class UI:
         self._file_handler = FileHandler(self._root, self._textarea)
         self._main_editor = EditorMain(self._root, self._textarea)
         self._visual_editor = VisualEditor(self._root, self._textarea)
+        self._source_editor = SourceEditor(self._root, self._textarea)
         self._edit_mode = tk.StringVar(value="source")
         self._all_files = all_files
         self._five_newest_files = five_newest_files
@@ -19,6 +25,7 @@ class UI:
         self.setup_buttons()
         self.setup_textarea()
         self.setup_toolbar()
+        self.setup_search()
         self.setup_style()
         self.switch_editor()
 
@@ -31,6 +38,8 @@ class UI:
             master=self._root, text="New file", command=self._file_handler.new_file)
         save_file_button = ttk.Button(
             master=self._root, text="Save", command=self._file_handler.save_file, style="info.TButton")
+        preview_button = ttk.Button(
+            master=self._root, text="Preview", command=self.preview, style="info.TButton")
         self.source_button = ttk.Radiobutton(
             master=self._root, text="Source", value="source",
             variable=self._edit_mode, command=self.switch_editor,
@@ -42,8 +51,9 @@ class UI:
 
         # Place buttons
         open_file_button.place(relx=0.09, rely=0.1, anchor="center")
-        new_file_button.place(relx=0.19, rely=0.1, anchor="center")
-        save_file_button.place(relx=0.29, rely=0.1, anchor="center")
+        new_file_button.place(relx=0.1625, rely=0.1, anchor="center")
+        save_file_button.place(relx=0.23, rely=0.1, anchor="center")
+        preview_button.place(relx=0.3, rely=0.1, anchor="center")
         self.source_button.place(relx=0.91, rely=0.1, anchor="center")
         self.visual_button.place(relx=0.81, rely=0.1, anchor="center")
 
@@ -72,6 +82,8 @@ class UI:
             "i")).pack(pady=2, fill="x")
         ttk.Button(self.toolbar, text="𝐔", command=lambda: self._main_editor.insert_tag(
             "u")).pack(pady=2, fill="x")
+        ttk.Button(self.toolbar, text="List", command=lambda: self._main_editor.insert_tag(
+            "li")).pack(pady=2, fill="x")
         heading_button = ttk.Menubutton(self.toolbar, text="H.")
         heading_button.pack(pady=2, fill="x")
 
@@ -80,6 +92,24 @@ class UI:
             heading_menu.add_command(
                 label=f"Heading {i}", command=lambda h=i: self._main_editor.insert_tag(f"h{h}"))
         heading_button["menu"] = heading_menu
+
+        self.toolbar.pack(side="left", fill="y", pady=110)
+
+    def setup_search(self):
+        """Find and replace setup"""
+        search_entry = ttk.Entry(self._root)
+        search_entry.place(relx=0.165, rely=0.97, anchor="center", width=300)
+        replace_entry = ttk.Entry(self._root)
+        replace_entry.place(relx=0.7, rely=0.97, anchor="center", width=300)
+        search_button = ttk.Button(
+            self._root, text="Find text", command=lambda: self._main_editor.search(search_entry.get()))
+        search_button.place(relx=0.31, rely=0.972, anchor="center")
+        replace_one_button = ttk.Button(
+            self._root, text="Replace", command=lambda: self._main_editor.replace_one(search_entry.get(), replace_entry.get()))
+        replace_one_button.place(relx=0.85, rely=0.972, anchor="center")
+        replace_all_button = ttk.Button(
+            self._root, text="Replace all", command=lambda: self._main_editor.replace_all(search_entry.get(), replace_entry.get()))
+        replace_all_button.place(relx=0.915, rely=0.972, anchor="center")
 
     def setup_style(self):
         """Initial button styling"""
@@ -92,16 +122,23 @@ class UI:
         if current == "source":
             ttk.Style().configure("customsource.TButton", background="#b09646")
             ttk.Style().configure("customvisual.TButton", background="#e6c35a")
-            self.toolbar.pack_forget()
-            self._textarea.unbind("<KeyRelease>")
+            self._textarea.unbind("<KeyRelease>") # Remove any previous bindings
+            self._textarea.bind(
+                "<KeyRelease>", self._source_editor.on_key_release) # Switch to using source editor's bindings
             for tag in TAGS:
-                self._textarea.tag_remove(tag, "1.0", tk.END)
+                self._textarea.tag_remove(tag, "1.0", tk.END) # Remove all visual editor tags
+            self._source_editor.highlight_syntax(
+                self._textarea.get("1.0", "end-1c"))
         else:
             ttk.Style().configure("customvisual.TButton", background="#b09646")
             ttk.Style().configure("customsource.TButton", background="#e6c35a")
-            self.toolbar.pack(side="left", fill="y", pady=100)
-            self._textarea.bind("<KeyRelease>", self._visual_editor.on_key_release)
-            self._visual_editor.visualize_html(self._textarea.get("1.0", "end-1c"))
+            self._textarea.unbind("<KeyRelease>") # Remove any previous bindings
+            self._textarea.bind(
+                "<KeyRelease>", self._visual_editor.on_key_release) # Switch to using visual editor's bindings
+            for tag in ["tag_bracket", "tag_name"]:
+                self._textarea.tag_remove(tag, "1.0", tk.END) # Remove all source editor tags
+            self._visual_editor.visualize_html(
+                self._textarea.get("1.0", "end-1c"))
 
     def all_files_popup(self):
         """Sets up the popup for opening the list of all files"""
@@ -126,3 +163,13 @@ class UI:
                 selected_file = self._all_files[index[0]]
                 self._file_handler.open_file(file=selected_file[3])
                 popup.destroy()
+
+    def preview(self):
+        """Opens the current HTML file in a web browser"""
+        html_content = self._textarea.get("1.0", tk.END)
+
+        with tempfile.NamedTemporaryFile('w', delete=False, suffix='.html') as f:
+            f.write(html_content)
+            file_path = f.name
+
+        webbrowser.open(f"file://{os.path.abspath(file_path)}")
