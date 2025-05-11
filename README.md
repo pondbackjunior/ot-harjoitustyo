@@ -10,6 +10,7 @@ Sovelluksen avulla käyttäjän on mahdollista muokata HTML-tiedostoja.
 - [Arkkitehtuuri](./dokumentaatio/arkkitehtuuri.md)
 - [Käyttöohjeet](./dokumentaatio/kaytto-ohjeet.md)
 - [Releaset](https://github.com/pondbackjunior/ot-harjoitustyo/releases)
+- [Pylint-huomio](./dokumentaatio/pylint.md)
 
 ## Asennus
 
